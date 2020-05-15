@@ -4,7 +4,7 @@ Kenzie assignment: String2
 """
 # Your name, plus anyone who helped you with this assignment.
 # Give credit where credit is due.
-__author__ = "???"
+__author__ = "Ben McKenzie"
 
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
@@ -20,11 +20,16 @@ __author__ = "???"
 # instead.
 # If the string length is less than 3, leave it unchanged.
 # Return the resulting string.
+# if the last three char of a string with len 3 or great are ing, add ly, otherwise add ing
 
 
 def verbing(s):
-    # your code here
-    return
+    if len(s) >= 3:
+        if s.endswith('ing'):
+            s += "ly"
+        else:
+            s += "ing"
+    return s
 
 
 # E. not_bad
@@ -37,8 +42,11 @@ def verbing(s):
 
 
 def not_bad(s):
-    # your code here
-    return
+    stringnot = s.find("not")
+    stringbad = s.find("bad")
+    if stringbad > stringnot:
+        s = s.replace(s[stringnot : (stringbad + 3)], "good")
+    return s
 
 
 # F. front_back
@@ -52,21 +60,36 @@ def not_bad(s):
 
 
 def front_back(a, b):
-    # your code here
-    return
+    alength = len(a)
+    blength = len(b)
+
+    if alength % 2 == 0:
+        aindex = alength // 2
+    else:
+        aindex = (alength // 2) + 1
+
+    if blength % 2 == 0:
+        bindex = blength // 2
+    else:
+        bindex = (blength // 2) + 1
+
+    afront = a[0:aindex]
+    aback = a[aindex:]
+
+    bfront = b[0:bindex]
+    bback = b[bindex:]
+
+    return afront + bfront + aback + bback
 
 
 # Provided simple test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
 def test(got, expected):
     if got == expected:
-        prefix = ' OK '
+        prefix = " OK "
     else:
-        prefix = '  X '
-    print('{} got: {}     expected: {}'.format(
-        prefix,
-        repr(got),
-        repr(expected)))
+        prefix = "  X "
+    print("{} got: {}     expected: {}".format(prefix, repr(got), repr(expected)))
 
 
 # The main() function calls the above functions with interesting
@@ -75,24 +98,24 @@ def main():
     # Each line calls one of the functions above and compares its
     # result to the expected return value for that call.
 
-    print('verbing')
-    test(verbing('hail'), 'hailing')
-    test(verbing('swimming'), 'swimmingly')
-    test(verbing('do'), 'do')
+    print("verbing")
+    test(verbing("hail"), "hailing")
+    test(verbing("swimming"), "swimmingly")
+    test(verbing("do"), "do")
 
-    print('\nnot_bad')
-    test(not_bad('This movie is not so bad'), 'This movie is good')
-    test(not_bad('This dinner is not that bad!'), 'This dinner is good!')
-    test(not_bad('This tea is not hot'), 'This tea is not hot')
+    print("\nnot_bad")
+    test(not_bad("This movie is not so bad"), "This movie is good")
+    test(not_bad("This dinner is not that bad!"), "This dinner is good!")
+    test(not_bad("This tea is not hot"), "This tea is not hot")
     test(not_bad("It's bad yet not"), "It's bad yet not")
 
-    print('\nfront_back')
-    test(front_back('abcd', 'xy'), 'abxcdy')
-    test(front_back('abcde', 'xyz'), 'abcxydez')
-    test(front_back('Kitten', 'Donut'), 'KitDontenut')
+    print("\nfront_back")
+    test(front_back("abcd", "xy"), "abxcdy")
+    test(front_back("abcde", "xyz"), "abcxydez")
+    test(front_back("Kitten", "Donut"), "KitDontenut")
 
 
 # Standard boilerplate (python idiom) to call the main() function.
 # This is called an "import guard".
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
