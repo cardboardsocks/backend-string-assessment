@@ -25,7 +25,7 @@ __author__ = "Ben McKenzie"
 
 def verbing(s):
     if len(s) >= 3:
-        if s[-3] == "ing":
+        if s.endswith('ing'):
             s += "ly"
         else:
             s += "ing"
